@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
 			chunks: 'index',
 			inject: true,
 		}),
+    new MiniCssExtractPlugin( {
+      filename: 'styles.css'
+    } )
 	],
 	module: {
 		rules: [
@@ -37,15 +41,17 @@ module.exports = {
 			test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
 
 			use: [
-				{
-					loader: 'style-loader',
-					options: {
-						injectType: 'singletonStyleTag',
-						attributes: {
-							'data-cke': true
-						}
-					}
-				},
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+				// {
+				// 	loader: 'style-loader',
+				// 	options: {
+				// 		injectType: 'singletonStyleTag',
+				// 		attributes: {
+				// 			'data-cke': true
+				// 		}
+				// 	}
+				// },
 				{
 					loader: 'postcss-loader',
 					options: styles.getPostCssConfig( {

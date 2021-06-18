@@ -7,11 +7,11 @@ export default class InsertImagePlugin extends Plugin {
 	init() {
 		const editor = this.editor;
 
-		editor.ui.componentFactory.add( 'insertImage', locale => {
+		editor.ui.componentFactory.add( 'insertImagePlugin', locale => {
 			const view = new ButtonView( locale );
 
 			view.set( {
-				label: 'Insert image',
+				label: 'Insert image plugin',
 				icon: imageIcon,
 				tooltip: true
 			} );
